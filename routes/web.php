@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +25,15 @@ Route::get('/test', function () {
 Route::get('/home', function () {
     return view('home');
 });
+
+Route::get('/login', [LoginController::class, 'index']);
+
+// ini menggunakan midleware
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/admin', [HomeController::class, 'index']);
+});
+
+Route::group(['middleware' => ['role:user']], function () {
+    Route::get('/user', [HomeController::class, 'index']);
+});
+

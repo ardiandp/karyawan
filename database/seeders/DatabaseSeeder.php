@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,5 +18,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // Membuat user dengan role 'user'
+        User::factory()->count(12)->create(['role' => 'admin']);
+
+        // Membuat user dengan role 'admin'
+       // User::factory()->admin()->create();
     }
 }
