@@ -1,5 +1,4 @@
 
-
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -71,22 +70,22 @@
                 <span class="badge badge-info right">6</span>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-             
-            
+            <ul class="nav nav-treeview">          
               <li class="nav-item">
                 <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Fixed Sidebar </p>
                 </a>
               </li>
-             
-           
-            </ul>
+           </ul>           
           </li>
          
+
+         
         
-                 </ul>
+          </ul>
+
+        
       </nav>
       <!-- /.sidebar-menu -->
     </div>

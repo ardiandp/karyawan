@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 use App\Models\User;
+use App\Models\Menu;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         // Membuat user dengan role 'user'
         User::factory()->count(12)->create();
-       
+        Menu::factory()->count(10)->create();
         // Membuat user dengan role 'admin'
        // User::factory()->admin()->create();
     }
