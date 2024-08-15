@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         // Membuat user dengan role 'user'
-        User::factory()->count(12)->create(['role' => 'admin']);
-
+        User::factory()->count(12)->create();
+       
         // Membuat user dengan role 'admin'
        // User::factory()->admin()->create();
     }

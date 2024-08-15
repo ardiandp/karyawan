@@ -12,15 +12,25 @@ class LoginController extends Controller
         return view('auth.login');
     }
     
-    protected function authenticated(Request $request, $user)
+    public function login(Request $request)
     {
-            if ($user->role === 'admin') {
-                return redirect()->intended('/admin/dashboard');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        
+        $credentials = $request->only('email', 'password');
+        
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+            if ($user->role == 'admin') {
+                return redirect('/home');
+            } else {
+                return redirect('/home');
             }
-
-            return redirect()->intended('/user/dashboard');
+        }
+        return redirect('/login')->with('error', 'Login details are not valid');    
     }
-
     public function logout(Request $request)
     {
         $request->session()->invalidate();

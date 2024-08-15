@@ -16,7 +16,7 @@
           <img src="https://picsum.photos/200" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{ strtolower(Auth::user()->name) }} ({{ strtolower(Auth::user()->role) }})</a>
         </div>
       </div>
 
