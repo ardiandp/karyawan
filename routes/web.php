@@ -37,7 +37,13 @@ Route::get('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destr
 
 // Blank
 Route::get('/blank',[HomeController::class, 'blank'])->name('blank');
+Route::get('/table',[HomeController::class, 'table'])->name('table');
+
+
+// Auth
 });
+
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);

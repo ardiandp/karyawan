@@ -22,6 +22,11 @@ class HomeController extends Controller
 
     public function blank()
     {
-        return view('blank');
+        return view('example.blank');
+    }
+
+    public function table()
+    {
+        return view('example.table');
     }
 }
