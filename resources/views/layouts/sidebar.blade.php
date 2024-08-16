@@ -61,11 +61,44 @@
         <p>Dashboard</p>
         </a>
         </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+                MASTER
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">  
+            <li class="nav-item">
+                <a href="{{ url('/blank')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Balnk </p>
+                </a>
+              </li>        
+              <li class="nav-item">
+                <a href="{{ url('/menu')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Menu </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/karyawan')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Karyawan </p>
+                </a>
+              </li>
+           </ul>           
+          </li>
+
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Layout Options
+                Layout Options SAMPLE
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
               </p>

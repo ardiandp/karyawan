@@ -19,4 +19,9 @@ class HomeController extends Controller
     {
         return view('user.index');
     }
+
+    public function blank()
+    {
+        return view('blank');
+    }
 }

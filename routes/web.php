@@ -15,14 +15,28 @@ use App\Http\Controllers\MenuController;
 |
 */
 
-Route::redirect('/', '/login');
+
+Route::get('/', [LoginController::class, 'index'])->name('login');
 
 Route::get('/test', function () {
     return view('layouts.app');
 });
 
+Route::group(['middleware' => ['auth']], function () {
 Route::get('/home', function () {
     return view('home');
+});
+
+// Route Menu
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+Route::get('/menu/create', [MenuController::class, 'create'])->name('menu.create');
+Route::post('/menu', [MenuController::class, 'store'])->name('menu.store');
+Route::get('/menu/{menu}/edit', [MenuController::class, 'edit']);
+Route::put('/menu/{menu}', [MenuController::class, 'update'])->name('menu.update');
+Route::get('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
+
+// Blank
+Route::get('/blank',[HomeController::class, 'blank'])->name('blank');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
