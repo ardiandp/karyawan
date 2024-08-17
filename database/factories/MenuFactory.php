@@ -21,7 +21,7 @@ class MenuFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'slug' => Str::slug($this->faker->word()),
+            'slug' => Str::slug($this->faker->unique()->word()),
             'parent_id' => $this->faker->numberBetween(1, 10),
             'order' => $this->faker->numberBetween(1, 10),
         ];
