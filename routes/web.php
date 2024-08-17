@@ -35,11 +35,11 @@ Route::get('/menu/{menu}/edit', [MenuController::class, 'edit']);
 Route::put('/menu/{menu}', [MenuController::class, 'update'])->name('menu.update');
 Route::get('/menu/{menu}', [MenuController::class, 'destroy'])->name('menu.destroy');
 
-// Blank
-Route::get('/blank',[HomeController::class, 'blank'])->name('blank');
-Route::get('/table',[HomeController::class, 'table'])->name('table');
-
-
+// examples
+Route::get('/examples/blank',[HomeController::class, 'blank'])->name('examples/blank');
+Route::get('/examples/table',[HomeController::class, 'table'])->name('examples/table');
+Route::get('/examples/kanban',[HomeController::class, 'kanban'])->name('examples/kanban');
+Route::get('/examples/form',[HomeController::class, 'form'])->name('examples/form');
 // Auth
 });
 

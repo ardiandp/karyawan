@@ -72,12 +72,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">  
-            <li class="nav-item">
-                <a href="{{ url('/blank')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Balnk </p>
-                </a>
-              </li>        
+               
               <li class="nav-item">
                 <a href="{{ url('/menu')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -97,17 +92,34 @@
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options SAMPLE
+              <p>EXAMPLES 
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                <span class="badge badge-info right"></span>
               </p>
             </a>
             <ul class="nav nav-treeview">          
               <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                <a href="{{ url('examples/blank')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar </p>
+                  <p>Blank </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('examples/table')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Table </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('examples/kanban')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Kanban </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('examples/form')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Form </p>
                 </a>
               </li>
            </ul>           

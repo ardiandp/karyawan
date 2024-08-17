@@ -20,8 +20,7 @@
 
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{ url ('adminlte/plugins/chart.js/Chart.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ url ('adminlte/dist/js/demo.js')}}"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ url ('adminlte/dist/js/pages/dashboard3.js')}}"></script>
 
@@ -40,9 +39,8 @@
 <script src="{{ url ('adminlte/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{ url ('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{ url ('adminlte/dist/js/adminlte.min.js')}}"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{ url ('adminlte/dist/js/demo.js')}}"></script>
+
+
 <!-- Page specific script -->
 <script>
   $(function () {

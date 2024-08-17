@@ -29,4 +29,15 @@ class HomeController extends Controller
     {
         return view('example.table');
     }
+
+    public function kanban()
+    {
+        return view('example.kanban');
+    }
+
+    public function form()
+    {
+        return view('example.form');
+    }
+
 }
