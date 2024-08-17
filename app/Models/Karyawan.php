@@ -38,9 +38,34 @@ class Karyawan extends Model
         return $this->hasMany(Pendidikan::class);
     }
 
-    public function pengalaman()
+    public function pengalamankerja()
     {
-        return $this->hasMany(Pengalaman::class);
+        return $this->hasMany(Pengalamankerja::class);
+    }
+
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class);
+    }
+
+    public function anggotakeluarga()
+    {
+        return $this->hasMany(AnggotaKeluarga::class);
+    }
+
+    public function pelatihan()
+    {
+        return $this->hasMany(Pelatihan::class);
+    }
+
+    public function penghargaan()
+    {
+        return $this->hasMany(Penghargaan::class);
+    }
+
+    public function keahlian()
+    {
+        return $this->hasMany(Keahlian::class);
     }
 
     

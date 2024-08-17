@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\KaryawanController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,11 @@ Route::get('/examples/blank',[HomeController::class, 'blank'])->name('examples/b
 Route::get('/examples/table',[HomeController::class, 'table'])->name('examples/table');
 Route::get('/examples/kanban',[HomeController::class, 'kanban'])->name('examples/kanban');
 Route::get('/examples/form',[HomeController::class, 'form'])->name('examples/form');
+
+//Karyawan
+Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
+Route::delete('/karyawan/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 // Auth
 });
 
