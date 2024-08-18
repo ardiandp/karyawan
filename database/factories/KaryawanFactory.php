@@ -18,6 +18,7 @@ class KaryawanFactory extends Factory
     public function definition(): array
     {
         return [
+            'nik' => $this->generateNik(),
             'nama_depan' => $this->faker->firstName(),
             'nama_belakang' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
@@ -32,5 +33,20 @@ class KaryawanFactory extends Factory
             'photo' => $this->faker->imageUrl(),
             'tanggal_bergabung' => $this->faker->date(),
         ];
+    }
+
+    private function generateNik()
+    {
+        // Kode wilayah: 6 digit
+        $kodeWilayah = $this->faker->numberBetween(110000, 940000);
+
+        // Tanggal lahir: 6 digit (DDMMYY)
+        $tanggalLahir = $this->faker->date('dmY');
+        $tanggalLahir = substr($tanggalLahir, 0, 2) . substr($tanggalLahir, 2, 2) . substr($tanggalLahir, 4, 2);
+
+        // Nomor urut: 4 digit
+        $nomorUrut = $this->faker->numberBetween(1000, 9999);
+
+        return $kodeWilayah . $tanggalLahir . $nomorUrut;
     }
 }

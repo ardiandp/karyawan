@@ -45,7 +45,14 @@ Route::get('/examples/form',[HomeController::class, 'form'])->name('examples/for
 //Karyawan
 Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
 Route::get('/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
+Route::post('karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
+Route::get('/karyawan/edit/{id}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
 Route::delete('/karyawan/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
+Route::get('/karyawan/profil/{id}', [KaryawanController::class, 'profil'])->name('karyawan.profil');
+
+Route::get('/karyawan/anggotakeluargaupdate', [KaryawanController::class, 'anggotakeluargaupdate'])->name('karyawan.anggotakeluargaupdate');
+Route::get('/karyawan/anggotakeluargastore', [KaryawanController::class, 'anggotakeluargastore'])->name('karyawan.anggotakeluargastore');
 // Auth
 });
 

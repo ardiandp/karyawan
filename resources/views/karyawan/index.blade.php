@@ -32,6 +32,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
+                    <td>No</td>
                    <td>Nama Depan </td>
                    <td>Email</td>
                    <td>Telp </td>
@@ -43,16 +44,17 @@
                  
                   @foreach ($karyawan as $karyawan)
                    <tr>
-                     <td>{{$karyawan->nama_depan}}</td>
+                    <td>{{$loop->iteration}}</td>
+                     <td><a href="/karyawan/profil/{{ $karyawan->id}}">{{$karyawan->nama_depan}} </a></td>
                      <td>{{$karyawan->email}}</td>
                      <td>{{$karyawan->telepon}}</td>
                      <td>{{$karyawan->status_pegawai}}</td>
                      <td>
-                       <a href="/karyawan/edit/{{ $karyawan->id}}" class="btn btn-primary">Edit</a>
+                       <a href="/karyawan/edit/{{ $karyawan->id}}" class="btn btn-sm btn-warning">Edit</a>
                        <form action="/karyawan/{{$karyawan->id}}" method="post" class="d-inline">
                          @csrf
                          @method('delete')
-                         <button type="submit" class="btn btn-danger">Delete</button>
+                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                        </form>
                      </td>
                    </tr>
