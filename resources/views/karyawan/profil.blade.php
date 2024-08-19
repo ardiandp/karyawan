@@ -55,8 +55,52 @@
       <div class="tab-pane fade show active" id="anggota-keluarga" role="tabpanel" aria-labelledby="anggota-keluarga-tab">
         {{ $karyawan->anggota_keluarga }} 
         <!-- coding awak disini --> 
-   keluarga
-     <table class="table">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_anggota_keluarga">Tambah Anggota</button>
+        <!-- Modal -->
+        <div class="modal fade" id="add_anggota_keluarga" tabindex="-1" role="dialog" aria-labelledby="add_anggota_keluarga_label" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add_anggota_keluarga_label">Tambah Anggota Keluarga</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{ route('karyawan.anggotakeluargastore', $karyawan->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                  <input type="text" name="id" value="{{ $karyawan->id }}" >
+                  <div class="form-group">
+                    <label for="nama">Nama</label>
+                    <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
+                  </div>
+                  <div class="form-group">
+                    <label for="hubungan">Hubungan</label>
+                    <input type="text" class="form-control" id="hubungan" name="hubungan" placeholder="Hubungan">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir">
+                  </div>
+                  <div class="form-group">
+                    <label for="telepon">Telepon</label>
+                    <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Telepon">
+                  </div>
+                  <div class="form-group">
+                    <label for="alamat">Alamat</label>
+                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <table id="example" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -71,14 +115,15 @@
       <tbody>
       @foreach ($karyawan->anggotaKeluarga as $anggota_keluarga)
             <tr>
-                <td></td>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $anggota_keluarga->nama }}</td>
                 <td>{{ $anggota_keluarga->hubungan }}</td>
                 <td>{{ $anggota_keluarga->tanggal_lahir }}</td>
                 <td>{{ $anggota_keluarga->telepon }}</td>
                 <td>{{ $anggota_keluarga->alamat }}</td>
                 <td>
-                  <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#edit_anggota_keluarga_{{ $anggota_keluarga->id }}">Edit</a>
+                  <a href="#" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#edit_anggota_keluarga_{{ $anggota_keluarga->id }}">Edit</a>
+                  <a href="{{ route('karyawan.anggotakeluargadelete', $anggota_keluarga->id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
 
                   <div class="modal fade" id="edit_anggota_keluarga_{{ $anggota_keluarga->id }}" tabindex="-1" role="dialog" aria-labelledby="edit_anggota_keluarga_label_{{ $anggota_keluarga->id }}" aria-hidden="true">
                     <div class="modal-dialog" role="document">

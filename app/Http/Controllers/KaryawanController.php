@@ -80,5 +80,36 @@ class KaryawanController extends Controller
         return view('karyawan.profil', compact('karyawan'));
     }
 
+
+
+    public function updateanggotakeluarga(Request $request, $id)
+    {
+        $anggota_keluarga = AnggotaKeluarga::find($id);
+        $anggota_keluarga->update($request->all());
+        return redirect()->route('karyawan.profil', $anggota_keluarga->karyawan_id)->with('success', 'Data berhasil diupdate');
+    }
+
+    public function anggotakeluargadelete($id)
+    {
+        $anggota_keluarga = AnggotaKeluarga::find($id);
+        $anggota_keluarga->delete();
+        return redirect()->route('karyawan.profil', $anggota_keluarga->karyawan_id)->with('success', 'Data berhasil dihapus');
+    }
+
+ 
+
+    public function anggotakeluargastore(Request $request, $id)
+    {
+        $anggota_keluarga = new AnggotaKeluarga();
+        $anggota_keluarga->karyawan_id = $id;
+        $anggota_keluarga->nama = $request->nama;
+        $anggota_keluarga->hubungan = $request->hubungan;
+        $anggota_keluarga->tanggal_lahir = $request->tanggal_lahir;
+        $anggota_keluarga->telepon = $request->telepon;
+        $anggota_keluarga->alamat = $request->alamat;
+        $anggota_keluarga->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
    
 }
