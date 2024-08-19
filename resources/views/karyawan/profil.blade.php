@@ -69,7 +69,7 @@
               <form action="{{ route('karyawan.anggotakeluargastore', $karyawan->id) }}" method="POST">
                 @csrf
                 <div class="modal-body">
-                  <input type="text" name="id" value="{{ $karyawan->id }}" >
+                  <input type="text" name="id" value="{{ $karyawan->id }}" hidden >
                   <div class="form-group">
                     <label for="nama">Nama</label>
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
@@ -137,8 +137,8 @@
                         <div class="modal-body">
                           <form action="{{ route('karyawan.anggotakeluargaupdate', $anggota_keluarga->id) }}" method="POST">
                             @csrf
-                            @method('PUT')
-                            <input type="hidden" name="karyawan_id" value="{{ $karyawan->id }}">
+                           
+                            <input type="hidden" name="id" value="{{ $karyawan->id }}">
                             <div class="form-group">
                               <label for="nama">Nama</label>
                               <input type="text" class="form-control" id="nama" name="nama" value="{{ $anggota_keluarga->nama }}">
@@ -178,8 +178,160 @@
    <!-- coding akhir disini -->
     </div>
       <div class="tab-pane fade" id="pendidikan" role="tabpanel" aria-labelledby="pendidikan-tab">
-        {{ $karyawan->pendidikan }}
         Pendidikan
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nama Institusi</th>
+              <th>Jenjang</th>
+              <th>Gelar</th>
+              <th>Bidang Studi</th>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Selesai</th>
+              <th>Nilai</th>
+              <th>Deskripsi</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($karyawan->pendidikan as $pendidikan)
+            <tr>
+              <td>{{ $pendidikan->nama_institusi }}</td>
+              <td>{{ $pendidikan->jenjang }}</td>
+              <td>{{ $pendidikan->gelar }}</td>
+              <td>{{ $pendidikan->bidang_studi }}</td>
+              <td>{{ $pendidikan->tanggal_mulai }}</td>
+              <td>{{ $pendidikan->tanggal_selesai }}</td>
+              <td>{{ $pendidikan->nilai }}</td>
+              <td>{{ $pendidikan->deskripsi }}</td>
+              <td>
+                <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editPendidikan{{ $pendidikan->id }}">
+                  Edit
+                </button>
+                <div class="modal fade" id="editPendidikan{{ $pendidikan->id }}" tabindex="-1" role="dialog" aria-labelledby="editPendidikanLabel{{ $pendidikan->id }}" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editPendidikanLabel{{ $pendidikan->id }}">Edit Pendidikan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('karyawan.pendidikanupdate', [$karyawan->id, $pendidikan->id]) }}" method="post">
+                          @csrf
+                          @method('put')
+                          <div class="form-group">
+                            <label for="nama_institusi">Nama Institusi</label>
+                            <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{ $pendidikan->nama_institusi }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="jenjang">Jenjang</label>
+                            <input type="text" class="form-control" id="jenjang" name="jenjang" value="{{ $pendidikan->jenjang }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="gelar">Gelar</label>
+                            <input type="text" class="form-control" id="gelar" name="gelar" value="{{ $pendidikan->gelar }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="bidang_studi">Bidang Studi</label>
+                            <input type="text" class="form-control" id="bidang_studi" name="bidang_studi" value="{{ $pendidikan->bidang_studi }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="tanggal_mulai">Tanggal Mulai</label>
+                            <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="{{ $pendidikan->tanggal_mulai }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="tanggal_selesai">Tanggal Selesai</label>
+                            <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="{{ $pendidikan->tanggal_selesai }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="nilai">Nilai</label>
+                            <input type="text" class="form-control" id="nilai" name="nilai" value="{{ $pendidikan->nilai }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea class="form-control" id="deskripsi" name="deskripsi">{{ $pendidikan->deskripsi }}</textarea>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPendidikan">
+          Add Pendidikan
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="addPendidikan" tabindex="-1" aria-labelledby="addPengalamanLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addPendidikan">Add Pengalaman Kerja</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="{{ route('karyawan.pendidikanstore', $karyawan->id) }}" method="POST">
+                  @csrf
+                  <div class="form-group">
+                    <label for="nama_institusi">Nama Institusi</label>
+                    <input type="text" class="form-control" id="nama_institusi" name="nama_institusi">
+                  </div>
+                  <div class="form-group">
+                    <label for="jenjang">Jenjang</label>
+                    <input type="text" class="form-control" id="jenjang" name="jenjang">
+                  </div>
+                  <div class="form-group">
+                    <label for="gelar">Gelar</label>
+                    <input type="text" class="form-control" id="gelar" name="gelar">
+                  </div>
+                  <div class="form-group">
+                    <label for="bidang_studi">Bidang Studi</label>
+                    <input type="text" class="form-control" id="bidang_studi" name="bidang_studi">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_mulai">Tanggal Mulai</label>
+                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_selesai">Tanggal Selesai</label>
+                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai">
+                  </div>
+                  <div class="form-group">
+                    <label for="nilai">Nilai</label>
+                    <input type="text" class="form-control" id="nilai" name="nilai">
+                  </div>
+                  <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+
+
+        
+
+     
       </div>
       <div class="tab-pane fade" id="pengalaman-kerja" role="tabpanel" aria-labelledby="pengalaman-kerja-tab">
         {{ $karyawan->pengalaman_kerja }}

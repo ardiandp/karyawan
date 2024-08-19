@@ -82,11 +82,21 @@ class KaryawanController extends Controller
 
 
 
-    public function updateanggotakeluarga(Request $request, $id)
+    public function anggotakeluargaupdate(Request $request, $id)
     {
+        // Mengambil semua inputan dari form
+        $input = $request->all();
+
+        // Menghapus inputan yang tidak perlu, seperti _token
+        unset($input['_token']);
+
+        // Memperbarui data karyawan berdasarkan id_karyawan
         $anggota_keluarga = AnggotaKeluarga::find($id);
-        $anggota_keluarga->update($request->all());
-        return redirect()->route('karyawan.profil', $anggota_keluarga->karyawan_id)->with('success', 'Data berhasil diupdate');
+        if ($anggota_keluarga) {
+            $anggota_keluarga->update($input);
+            return redirect()->route('karyawan.profil', $anggota_keluarga->karyawan_id)->with('success', 'Data berhasil dihapus');
+        }
+        return redirect()->route('karyawan.profil', $anggota_keluarga->karyawan_id)->with('success', 'Data berhasil dihapus');
     }
 
     public function anggotakeluargadelete($id)
@@ -108,6 +118,20 @@ class KaryawanController extends Controller
         $anggota_keluarga->telepon = $request->telepon;
         $anggota_keluarga->alamat = $request->alamat;
         $anggota_keluarga->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
+    public function pendidikanstore(Request $request, $id)
+    {
+        $pendidikan = new Pendidikan();
+        $pendidikan->karyawan_id = $id;
+        $pendidikan->nama_institusi = $request->nama_institusi;
+        $pendidikan->jenjang = $request->jenjang;
+        $pendidikan->gelar = $request->gelar;
+        $pendidikan->bidang_studi = $request->bidang_studi;
+        $pendidikan->tanggal_mulai = $request->tanggal_mulai;
+        $pendidikan->tanggal_selesai = $request->tanggal_selesai;
+        $pendidikan->save();
         return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
     }
 

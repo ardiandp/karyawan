@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('karyawan_id')->constrained('karyawan')->onDelete('cascade');
             $table->string('nama_institusi');
+            $table->string('jenjang');
             $table->string('gelar');
             $table->string('bidang_studi');
             $table->date('tanggal_mulai');

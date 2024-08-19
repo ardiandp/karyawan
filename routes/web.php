@@ -51,8 +51,13 @@ Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('karya
 Route::delete('/karyawan/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 Route::get('/karyawan/profil/{id}', [KaryawanController::class, 'profil'])->name('karyawan.profil');
 Route::get('/karyawan/anggotakeluargadelete/{id}', [KaryawanController::class, 'anggotakeluargadelete'])->name('karyawan.anggotakeluargadelete');
-Route::get('/karyawan/anggotakeluargaupdate', [KaryawanController::class, 'anggotakeluargaupdate'])->name('karyawan.anggotakeluargaupdate');
+Route::post('/karyawan/anggotakeluargaupdate/{id}', [KaryawanController::class, 'anggotakeluargaupdate'])->name('karyawan.anggotakeluargaupdate');
 Route::post('/karyawan/anggotakeluargastore/{id}', [KaryawanController::class, 'anggotakeluargastore'])->name('karyawan.anggotakeluargastore');
+Route::get('/karyawan/pendidikandelete/{id}', [KaryawanController::class, 'pendidikandelete'])->name('karyawan.pendidikandelete');
+Route::post('/karyawan/pendidikanupdate/{id}', [KaryawanController::class, 'pendidikanupdate'])->name('karyawan.pendidikanupdate');
+Route::post('/karyawan/pendidikanstore/{id}', [KaryawanController::class, 'pendidikanstore'])->name('karyawan.pendidikanstore');
+// Auth
+
 // Auth
 });
 

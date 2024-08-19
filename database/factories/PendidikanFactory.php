@@ -22,6 +22,7 @@ class PendidikanFactory extends Factory
                 return Pendidikan::factory()->create()->id;
             },
             'nama_institusi' => $this->faker->company(),
+            'jenjang' => $this->faker->company(),
             'gelar' => $this->faker->jobTitle(),
             'bidang_studi' => $this->faker->word(),
             'tanggal_mulai' => $this->faker->date(),

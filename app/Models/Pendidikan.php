@@ -14,6 +14,7 @@ class Pendidikan extends Model
     protected $fillable = [
         'karyawan_id',
         'nama_institusi',
+        'jenjang',
         'gelar',
         'bidang_studi',
         'tanggal_mulai',
