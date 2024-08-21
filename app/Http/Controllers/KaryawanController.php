@@ -131,9 +131,77 @@ class KaryawanController extends Controller
         $pendidikan->bidang_studi = $request->bidang_studi;
         $pendidikan->tanggal_mulai = $request->tanggal_mulai;
         $pendidikan->tanggal_selesai = $request->tanggal_selesai;
+        $pendidikan->nilai = $request->nilai;
+        $pendidikan->deskripsi = $request->deskripsi;
+        
         $pendidikan->save();
         return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
     }
+
+
+    
+    public function pendidikanupdate(Request $request, $id, $pendidikan_id)
+    {
+        $pendidikan = Pendidikan::find($pendidikan_id);
+        $pendidikan->karyawan_id = $id;
+        $pendidikan->nama_institusi = $request->nama_institusi;
+        $pendidikan->jenjang = $request->jenjang;
+        $pendidikan->gelar = $request->gelar;
+        $pendidikan->bidang_studi = $request->bidang_studi;
+        $pendidikan->tanggal_mulai = $request->tanggal_mulai;
+        $pendidikan->tanggal_selesai = $request->tanggal_selesai;
+        $pendidikan->nilai = $request->nilai;
+        $pendidikan->deskripsi = $request->deskripsi;
+        $pendidikan->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil diupdate');
+    }
+
+
+    public function pendidikandelete($id, $pendidikan_id)
+    {
+        $pendidikan = Pendidikan::find($pendidikan_id);
+        $pendidikan->delete();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
+    }
+
+
+    public function berkasstore(Request $request, $id)
+    {
+        $berkas = new Berkas();
+        $berkas->karyawan_id = $id;
+        $berkas->jenis_berkas = $request->jenis_berkas;
+        $berkas->nama_berkas = $request->nama_berkas;
+        $berkas->path_berkas = $request->path_berkas;
+        $berkas->tanggal_terbit = $request->tanggal_terbit;
+        $berkas->tanggal_kadaluarsa = $request->tanggal_kadaluarsa;
+        
+        $berkas->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
+
+    public function berkasupdate(Request $request, $id, $berkas_id)
+    {
+        $berkas = Berkas::find($berkas_id);
+        $berkas->karyawan_id = $id;
+        $berkas->jenis_berkas = $request->jenis_berkas;
+        $berkas->nama_berkas = $request->nama_berkas;
+        $berkas->path_berkas = $request->path_berkas;
+        $berkas->tanggal_terbit = $request->tanggal_terbit;
+        $berkas->tanggal_kadaluarsa = $request->tanggal_kadaluarsa;
+        
+        $berkas->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil diupdate');
+    }
+
+    
+    public function berkasdelete($id, $berkas_id)
+    {
+        $berkas = Berkas::find($berkas_id);
+        $berkas->delete();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
+    }
+
 
    
 }

@@ -53,9 +53,13 @@ Route::get('/karyawan/profil/{id}', [KaryawanController::class, 'profil'])->name
 Route::get('/karyawan/anggotakeluargadelete/{id}', [KaryawanController::class, 'anggotakeluargadelete'])->name('karyawan.anggotakeluargadelete');
 Route::post('/karyawan/anggotakeluargaupdate/{id}', [KaryawanController::class, 'anggotakeluargaupdate'])->name('karyawan.anggotakeluargaupdate');
 Route::post('/karyawan/anggotakeluargastore/{id}', [KaryawanController::class, 'anggotakeluargastore'])->name('karyawan.anggotakeluargastore');
-Route::get('/karyawan/pendidikandelete/{id}', [KaryawanController::class, 'pendidikandelete'])->name('karyawan.pendidikandelete');
-Route::post('/karyawan/pendidikanupdate/{id}', [KaryawanController::class, 'pendidikanupdate'])->name('karyawan.pendidikanupdate');
+Route::get('/karyawan/pendidikandelete/{id}/{id2}', [KaryawanController::class, 'pendidikandelete'])->name('karyawan.pendidikandelete');
+Route::post('/karyawan/pendidikanupdate/{id}/{id2}', [KaryawanController::class, 'pendidikanupdate'])->name('karyawan.pendidikanupdate');
 Route::post('/karyawan/pendidikanstore/{id}', [KaryawanController::class, 'pendidikanstore'])->name('karyawan.pendidikanstore');
+
+Route::post('/karyawan/berkasstore/{id}', [KaryawanController::class, 'berkasstore'])->name('karyawan.berkasstore');
+Route::delete('/karyawan/berkasdelete/{id}/{id2}', [KaryawanController::class, 'berkasdelete'])->name('karyawan.berkasdelete');
+Route::post('/karyawan/berkasupdate/{id}/{id2}', [KaryawanController::class, 'berkasupdate'])->name('karyawan.berkasupdate');
 // Auth
 
 // Auth

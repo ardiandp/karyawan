@@ -209,6 +209,8 @@
                 <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#editPendidikan{{ $pendidikan->id }}">
                   Edit
                 </button>
+                <a href="{{ route('karyawan.pendidikandelete', [$karyawan->id, $pendidikan->id]) }}" class="btn btn-sm btn-danger">Hapus</a>
+            
                 <div class="modal fade" id="editPendidikan{{ $pendidikan->id }}" tabindex="-1" role="dialog" aria-labelledby="editPendidikanLabel{{ $pendidikan->id }}" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -221,7 +223,7 @@
                       <div class="modal-body">
                         <form action="{{ route('karyawan.pendidikanupdate', [$karyawan->id, $pendidikan->id]) }}" method="post">
                           @csrf
-                          @method('put')
+                          @method('post')
                           <div class="form-group">
                             <label for="nama_institusi">Nama Institusi</label>
                             <input type="text" class="form-control" id="nama_institusi" name="nama_institusi" value="{{ $pendidikan->nama_institusi }}">
@@ -276,7 +278,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="addPendidikan">Add Pengalaman Kerja</h5>
+                <h5 class="modal-title" id="addPendidikan">Add Pendidikan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -336,9 +338,128 @@
       <div class="tab-pane fade" id="pengalaman-kerja" role="tabpanel" aria-labelledby="pengalaman-kerja-tab">
         {{ $karyawan->pengalaman_kerja }}
         Pengalaman kerja
+
       </div>
       <div class="tab-pane fade" id="berkas" role="tabpanel" aria-labelledby="berkas-tab">
-        {{ $karyawan->berkas }} Berkas disini 
+     
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Jenis Berkas</th>
+              <th>Nama Berkas</th>
+              <th>Path Berkas</th>
+              <th>Tanggal Terbit</th>
+              <th>Tanggal Kadaluarsa</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($karyawan->berkas as $berkas)
+            <tr>
+              <td>{{ $berkas->jenis_berkas }}</td>
+              <td>{{ $berkas->nama_berkas }}</td>
+              <td>{{ $berkas->path_berkas }}</td>
+              <td>{{ $berkas->tanggal_terbit }}</td>
+              <td>{{ $berkas->tanggal_kadaluarsa }}</td>
+              <td style="display: flex; align-items: center;">
+                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_berkas_{{ $berkas->id }}">Edit</a>
+                <form action="{{ route('karyawan.berkasdelete', [$karyawan->id, $berkas->id]) }}" method="POST" style="margin-left: 10px;">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_berkas">Tambah Berkas</a>
+        <div class="modal fade" id="add_berkas" tabindex="-1" role="dialog" aria-labelledby="add_berkas_label" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add_berkas_label">Tambah Berkas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{ route('karyawan.berkasstore', $karyawan->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="jenis_berkas">Jenis Berkas</label>
+                    <input type="text" class="form-control" id="jenis_berkas" name="jenis_berkas">
+                  </div>
+                  <div class="form-group">
+                    <label for="nama_berkas">Nama Berkas</label>
+                    <input type="text" class="form-control" id="nama_berkas" name="nama_berkas">
+                  </div>
+                  <div class="form-group">
+                    <label for="path_berkas">Path Berkas</label>
+                    <input type="text" class="form-control" id="path_berkas" name="path_berkas">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_terbit">Tanggal Terbit</label>
+                    <input type="date" class="form-control" id="tanggal_terbit" name="tanggal_terbit">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_kadaluarsa">Tanggal Kadaluarsa</label>
+                    <input type="date" class="form-control" id="tanggal_kadaluarsa" name="tanggal_kadaluarsa">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        @foreach ($karyawan->berkas as $berkas)
+        <div class="modal fade" id="edit_berkas_{{ $berkas->id }}" tabindex="-1" role="dialog" aria-labelledby="edit_berkas_label_{{ $berkas->id }}" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="edit_berkas_label_{{ $berkas->id }}">Edit Berkas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{ route('karyawan.berkasupdate', [$karyawan->id, $berkas->id]) }}" method="POST">
+                @csrf
+                @method('post')
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="jenis_berkas">Jenis Berkas</label>
+                    <input type="text" class="form-control" id="jenis_berkas" name="jenis_berkas" value="{{ $berkas->jenis_berkas }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="nama_berkas">Nama Berkas</label>
+                    <input type="text" class="form-control" id="nama_berkas" name="nama_berkas" value="{{ $berkas->nama_berkas }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="path_berkas">Path Berkas</label>
+                    <input type="text" class="form-control" id="path_berkas" name="path_berkas" value="{{ $berkas->path_berkas }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_terbit">Tanggal Terbit</label>
+                    <input type="date" class="form-control" id="tanggal_terbit" name="tanggal_terbit" value="{{ $berkas->tanggal_terbit }}">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_kadaluarsa">Tanggal Kadaluarsa</label>
+                    <input type="date" class="form-control" id="tanggal_kadaluarsa" name="tanggal_kadaluarsa" value="{{ $berkas->tanggal_kadaluarsa }}">
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        @endforeach
+
       </div>
       <div class="tab-pane fade" id="pelatihan" role="tabpanel" aria-labelledby="pelatihan-tab">
         {{ $karyawan->pelatihan }} pelatihan disini
