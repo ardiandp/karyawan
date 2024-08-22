@@ -60,6 +60,18 @@ Route::post('/karyawan/pendidikanstore/{id}', [KaryawanController::class, 'pendi
 Route::post('/karyawan/berkasstore/{id}', [KaryawanController::class, 'berkasstore'])->name('karyawan.berkasstore');
 Route::delete('/karyawan/berkasdelete/{id}/{id2}', [KaryawanController::class, 'berkasdelete'])->name('karyawan.berkasdelete');
 Route::post('/karyawan/berkasupdate/{id}/{id2}', [KaryawanController::class, 'berkasupdate'])->name('karyawan.berkasupdate');
+
+Route::post('/karyawan/pelatihanstore/{id}', [KaryawanController::class, 'pelatihanstore'])->name('karyawan.pelatihanstore');
+Route::delete('/karyawan/pelatihandelete/{id}/{id2}', [KaryawanController::class, 'pelatihandelete'])->name('karyawan.pelatihandelete');
+Route::post('/karyawan/pelatihanupdate/{id}/{id2}', [KaryawanController::class, 'pelatihanupdate'])->name('karyawan.pelatihanupdate');
+
+Route::post('/karyawan/penghargaanstore/{id}', [KaryawanController::class, 'penghargaanstore'])->name('karyawan.penghargaanstore');
+Route::delete('/karyawan/penghargaandelete/{id}/{id2}', [KaryawanController::class, 'penghargaandelete'])->name('karyawan.penghargaandelete');
+Route::post('/karyawan/penghargaanupdate/{id}/{id2}', [KaryawanController::class, 'penghargaanupdate'])->name('karyawan.penghargaanupdate');
+
+Route::post('/karyawan/keahlianstore/{id}', [KaryawanController::class, 'keahlianstore'])->name('karyawan.keahlianstore');
+Route::delete('/karyawan/keahliandelete/{id}/{id2}', [KaryawanController::class, 'keahliandelete'])->name('karyawan.keahliandelete');
+Route::post('/karyawan/keahlianupdate/{id}/{id2}', [KaryawanController::class, 'keahlianupdate'])->name('karyawan.keahlianupdate');
 // Auth
 
 // Auth

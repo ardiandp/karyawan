@@ -202,6 +202,97 @@ class KaryawanController extends Controller
         return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
     }
 
+    
+    public function pelatihanstore(Request $request, $id)
+    {
+        $pelatihan = new Pelatihan();
+        $pelatihan->karyawan_id = $id;
+        $pelatihan->nama_pelatihan = $request->nama_pelatihan;
+        $pelatihan->penyelenggara_pelatihan = $request->penyelenggara_pelatihan;
+        $pelatihan->tanggal_pelatihan = $request->tanggal_pelatihan;
+        $pelatihan->deskripsi = $request->deskripsi;
+        
+        $pelatihan->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
+    
+    public function pelatihanupdate(Request $request, $id, $pelatihan_id)
+    {
+        $pelatihan = Pelatihan::find($pelatihan_id);
+        $pelatihan->karyawan_id = $id;
+        $pelatihan->nama_pelatihan = $request->nama_pelatihan;
+        $pelatihan->penyelenggara_pelatihan = $request->penyelenggara_pelatihan;
+        $pelatihan->tanggal_pelatihan = $request->tanggal_pelatihan;
+        $pelatihan->deskripsi = $request->deskripsi;
+        
+        $pelatihan->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil diupdate');
+    }
+
+    
+    public function pelatihandelete($id, $pelatihan_id)
+    {
+        $pelatihan = Pelatihan::find($pelatihan_id);
+        $pelatihan->delete();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
+    }
+
+    
+    public function penghargaanstore(Request $request, $id)
+    {
+        $penghargaan = new Penghargaan();
+        $penghargaan->karyawan_id = $id;
+        $penghargaan->nama_penghargaan = $request->nama_penghargaan;
+        $penghargaan->tanggal_penghargaan = $request->tanggal_penghargaan;
+        $penghargaan->deskripsi_penghargaan = $request->deskripsi_penghargaan;
+        
+        $penghargaan->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
+    
+    public function penghargaandelete($id, $penghargaan_id)
+    {
+        $penghargaan = Penghargaan::find($penghargaan_id);
+        $penghargaan->delete();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
+    }
+
+
+    public function keahlianstore(Request $request, $id)
+    {
+        $keahlian = new Keahlian();
+        $keahlian->karyawan_id = $id;
+        $keahlian->nama_keahlian = $request->nama_keahlian;
+        $keahlian->tingkat_keahlian = $request->tingkat_keahlian;
+        
+        $keahlian->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
+    
+    public function keahlianupdate(Request $request, $id, $keahlian_id)
+    {
+        $keahlian = Keahlian::find($keahlian_id);
+        $keahlian->karyawan_id = $id;
+        $keahlian->nama_keahlian = $request->nama_keahlian;
+        $keahlian->tingkat_keahlian = $request->tingkat_keahlian;
+        
+        $keahlian->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil diupdate');
+    }
+
+    public function keahliandelete($id, $keahlian_id)
+    {
+        $keahlian = Keahlian::find($keahlian_id);
+        $keahlian->delete();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
+    }
+    
+
+
+
 
    
 }

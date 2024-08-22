@@ -462,13 +462,311 @@
 
       </div>
       <div class="tab-pane fade" id="pelatihan" role="tabpanel" aria-labelledby="pelatihan-tab">
-        {{ $karyawan->pelatihan }} pelatihan disini
+      
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nama Pelatihan</th>
+              <th>Penyelenggara</th>
+              <th>Tanggal </th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($karyawan->pelatihan as $pelatihan)
+            <tr>
+              <td>{{ $pelatihan->nama_pelatihan }}</td>
+              <td>{{ $pelatihan->penyelenggara_pelatihan }}</td>
+              <td>{{ $pelatihan->tanggal_pelatihan }}</td>
+              <td style="display: flex; align-items: center;">
+                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_pelatihan_{{ $pelatihan->id }}">Edit</a>
+                <div class="modal fade" id="edit_pelatihan_{{ $pelatihan->id }}" tabindex="-1" aria-labelledby="edit_pelatihan_{{ $pelatihan->id }}Label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="edit_pelatihan_{{ $pelatihan->id }}Label">Edit Pelatihan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form action="{{ route('karyawan.pelatihanupdate', [$karyawan->id, $pelatihan->id]) }}" method="POST">
+                        @csrf
+                        @method('post')
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <label for="nama_pelatihan">Nama Pelatihan</label>
+                            <input type="text" class="form-control" id="nama_pelatihan" name="nama_pelatihan" value="{{ $pelatihan->nama_pelatihan }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="penyelenggara_pelatihan">Penyelenggara Pelatihan</label>
+                            <input type="text" class="form-control" id="penyelenggara_pelatihan" name="penyelenggara_pelatihan" value="{{ $pelatihan->penyelenggara_pelatihan }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="tanggal_pelatihan">Tanggal Pelatihan</label>
+                            <input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan" value="{{ $pelatihan->tanggal_pelatihan }}">
+                          </div>
+                          <div class="form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea class="form-control" id="deskripsi" name="deskripsi">{{ $pelatihan->deskripsi }}</textarea>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <form action="{{ route('karyawan.pelatihandelete', [$karyawan->id, $pelatihan->id]) }}" method="POST" style="margin-left: 10px;">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_pelatihan">Tambah Pelatihan</a>
+        <div class="modal fade" id="add_pelatihan" tabindex="-1" aria-labelledby="add_pelatihanLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add_pelatihanLabel">Tambah Pelatihan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{ route('karyawan.pelatihanstore', $karyawan->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="nama_pelatihan">Nama Pelatihan</label>
+                    <input type="text" class="form-control" id="nama_pelatihan" name="nama_pelatihan" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="penyelenggara_pelatihan">Penyelenggara Pelatihan</label>
+                    <input type="text" class="form-control" id="penyelenggara_pelatihan" name="penyelenggara_pelatihan" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_pelatihan">Tanggal Pelatihan</label>
+                    <input type="date" class="form-control" id="tanggal_pelatihan" name="tanggal_pelatihan" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane fade" id="penghargaan" role="tabpanel" aria-labelledby="penghargaan-tab">
-        {{ $karyawan->penghargaan }} Penghargaa
+        
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nama Penghargaan</th>
+              <th>Tahun</th>
+              <th>Deskripsi</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($karyawan->penghargaan as $penghargaan)
+            <tr>
+              <td>{{ $penghargaan->nama_penghargaan }}</td>
+              <td>{{ $penghargaan->tanggal_penghargaan }}</td>
+              <td>{{ $penghargaan->deskripsi_penghargaan }}</td>
+              <td style="display: flex; align-items: center;">
+                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_penghargaan_{{ $penghargaan->id }}">Edit</a>
+                <div class="modal fade" id="edit_penghargaan_{{ $penghargaan->id }}" tabindex="-1" aria-labelledby="edit_penghargaan_{{ $penghargaan->id }}Label" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="edit_penghargaan_{{ $penghargaan->id }}Label">Edit Penghargaan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form action="{{ route('karyawan.penghargaanupdate', [$karyawan->id, $penghargaan->id]) }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <div class="modal-body">
+                          <div class="form-group">
+                            <label for="nama_penghargaan">Nama Penghargaan</label>
+                            <input type="text" class="form-control" id="nama_penghargaan" name="nama_penghargaan" value="{{ $penghargaan->nama_penghargaan }}" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="tanggal_penghargaan">Tanggal Penghargaan</label>
+                            <input type="text" class="form-control" id="tanggal_penghargaan" name="tanggal_penghargaan" value="{{ $penghargaan->tanggal_penghargaan }}" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="deskripsi_penghargaan">Deskripsi Penghargaan</label>
+                            <textarea class="form-control" id="deskripsi_penghargaan" name="deskripsi_penghargaan">{{ $penghargaan->deskripsi_penghargaan }}</textarea>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <form action="{{ route('karyawan.penghargaandelete', [$karyawan->id, $penghargaan->id]) }}" method="POST" style="margin-left: 10px;">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </td>
+            </tr>
+
+            
+            @endforeach
+          </tbody>
+        </table>
+        <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#add_penghargaan">Tambah Penghargaan</a>
+        <!-- Modal tambah penghargaan -->
+        <div class="modal fade" id="add_penghargaan" tabindex="-1" role="dialog" aria-labelledby="add_penghargaanLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add_penghargaanLabel">Tambah Penghargaan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{ route('karyawan.penghargaanstore', $karyawan->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="nama_penghargaan">Nama Penghargaan</label>
+                    <input type="text" class="form-control" id="nama_penghargaan" name="nama_penghargaan" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="tahun">Tahun</label>
+                    <input type="number" class="form-control" id="tahun" name="tanggal_penghargaan" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="deskripsi">Deskripsi</label>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi_penghargaan"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane fade" id="keahlian" role="tabpanel" aria-labelledby="keahlian-tab">
-        {{ $karyawan->keahlian }} Keahlian 
+      
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#add_keahlian">
+          Tambah Keahlian
+        </button>
+        
+        <!-- Modal tambah keahlian -->
+        <div class="modal fade" id="add_keahlian" tabindex="-1" role="dialog" aria-labelledby="add_keahlianLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="add_keahlianLabel">Tambah Keahlian</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form action="{{ route('karyawan.keahlianstore', $karyawan->id) }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="nama_keahlian">Nama Keahlian</label>
+                    <input type="text" class="form-control" id="nama_keahlian" name="nama_keahlian" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="tingkat_keahlian">Tingkat Keahlian</label>
+                    <input type="text" class="form-control" id="tingkat_keahlian" name="tingkat_keahlian" required>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Keahlian</th>
+              <th>Tingkat Keahlian</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($karyawan->keahlian as $keahlian)
+              <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $keahlian->nama_keahlian }}</td>
+                <td>{{ $keahlian->tingkat_keahlian }}</td>
+                <td style="display: flex; align-items: center;">
+
+                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#edit_keahlian{{ $keahlian->id }}">
+                    Edit
+                  </button>
+                  <div class="modal fade" id="edit_keahlian{{ $keahlian->id }}" tabindex="-1" role="dialog" aria-labelledby="edit_keahlianLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="edit_keahlianLabel">Edit Keahlian</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form action="{{ route('karyawan.keahlianupdate',   [$karyawan->id, $keahlian->id]) }}" method="POST">
+                          @csrf
+                          @method('post')
+                          <div class="modal-body">
+                            <div class="form-group">
+                              <label for="nama_keahlian">Nama Keahlian</label>
+                              <input type="text" class="form-control" id="nama_keahlian" name="nama_keahlian" value="{{ $keahlian->nama_keahlian }}" required>
+                            </div>
+                            <div class="form-group">
+                              <label for="tingkat_keahlian">Tingkat Keahlian</label>
+                              <input type="text" class="form-control" id="tingkat_keahlian" name="tingkat_keahlian" value="{{ $keahlian->tingkat_keahlian }}" required>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <form action="{{ route('karyawan.keahliandelete',  [$karyawan->id, $keahlian->id]) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                  </form>
+
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
