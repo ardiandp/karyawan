@@ -7,10 +7,10 @@ use App\Models\Menu;
 class Menucontroller extends Controller
 {
     public function index()
-    {
-        $menu = Menu::all();
-        return view('menu.index', compact('menu'));
-    }
+{
+    $menu = Menu::with('parent')->get();
+    return view('menu.index', compact('menu'));
+}
 
     public function create()
     {

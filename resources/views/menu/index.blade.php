@@ -1,30 +1,80 @@
-@include('layouts.header')
-@include('layouts.sidebar')
+@include ('layouts.header')
+@include ('layouts.sidebar')
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard v3</h1>
-          </div><!-- /.col -->
+            <h1>DataTables</h1>
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v3</li>
+              <li class="breadcrumb-item active">DataTables</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
+          </div>
+        </div>
       </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+    </section>
 
-<a href="{{ route('menu.create') }}" class="btn btn-primary mb-3">Create</a>
-<table class="table table-bordered" id="example">
-    <thead>
-        <tr>
+
+        <!-- Main content -->
+        <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                <a href="#" data-toggle="modal" data-target="#modal-add-menu" class="btn btn-primary float-right">Add Menu</a>
+                <div class="modal fade" id="modal-add-menu">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Add Menu</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('menu.store') }}" method="post">
+                          @csrf
+                          <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>Slug</label>
+                            <input type="text" name="slug" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label>Parent ID</label>
+                            <select name="parent_id" class="form-control select2">
+    <option value="">-- Pilih Menu Induk --</option>
+    @foreach ($menu as $item)
+        <option value="{{ $item->id }}">{{ $item->name }}</option>
+    @endforeach
+</select>
+                          </div>
+                          <div class="form-group">
+                            <label>Order</label>
+                            <input type="number" name="order" class="form-control">
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example2" class="table table-bordered table-hover">
+                  <thead>
+                  <tr>
             <th>Name</th>
             <th>Slug</th>
             <th>Parent ID</th>
@@ -37,7 +87,7 @@
         <tr>
             <td>{{$item->name}}</td>
             <td>{{$item->slug}}</td>
-            <td>{{$item->parent_id}}</td>
+            <td>{{ $item->parent->name ?? 'None' }}</td>
             <td>{{$item->order}}</td>
             <td>
                 <a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{$item->id}}">Edit</a>
@@ -65,7 +115,12 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="parent_id">Parent ID</label>
-                                        <input type="number" name="parent_id" id="parent_id" class="form-control" placeholder="Enter parent_id" value="{{$item->parent_id}}">
+                                        <select name="parent_id" class="form-control">
+                                        <option value="">-- Pilih Menu Induk --</option>
+                                        @foreach ($menu as $item)
+                                            <option value="{{ $item->id }}" {{ $item->parent_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="order">Order</label>
@@ -85,14 +140,19 @@
         </tr>
     @endforeach
     </tbody>
-</table>
+    </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 
 
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-@include('layouts.footer')
+    @include ('layouts.footer')
