@@ -72,6 +72,10 @@ Route::post('/karyawan/penghargaanupdate/{id}/{id2}', [KaryawanController::class
 Route::post('/karyawan/keahlianstore/{id}', [KaryawanController::class, 'keahlianstore'])->name('karyawan.keahlianstore');
 Route::delete('/karyawan/keahliandelete/{id}/{id2}', [KaryawanController::class, 'keahliandelete'])->name('karyawan.keahliandelete');
 Route::post('/karyawan/keahlianupdate/{id}/{id2}', [KaryawanController::class, 'keahlianupdate'])->name('karyawan.keahlianupdate');
+
+Route::post('/karyawan/pengalamankerjastore/{id}', [KaryawanController::class, 'pengalamankerjastore'])->name('karyawan.pengalamankerjastore');
+Route::get('/karyawan/pengalamankerjadelete/{id}/{id2}', [KaryawanController::class, 'pengalamankerjadelete'])->name('karyawan.pengalamankerjadelete');
+Route::post('/karyawan/pengalamankerjaupdate/{id}/{id2}', [KaryawanController::class, 'pengalamankerjaupdate'])->name('karyawan.pengalamankerjaupdate');
 // Auth
 
 // Auth

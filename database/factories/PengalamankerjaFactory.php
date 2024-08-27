@@ -21,9 +21,9 @@ class PengalamankerjaFactory extends Factory
             'karyawan_id' => Karyawan::factory()->create()->id,
             'nama_perusahaan' => $this->faker->company(),
             'jabatan' => $this->faker->jobTitle(),
-            'tanggung_jawab' => $this->faker->optional()->words(5, true),
             'tanggal_mulai' => $this->faker->date(),
             'tanggal_selesai' => $this->faker->optional()->date(),
+            'deskripsi_pekerjaan' => $this->faker->optional()->text(),
         ];
     }
 }

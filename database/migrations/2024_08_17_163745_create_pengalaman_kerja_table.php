@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('pengalaman_kerja', function (Blueprint $table) {
             $table->id();
             $table->foreignId('karyawan_id')->constrained('karyawan')->onDelete('cascade');
-            $table->string('nama');
-            $table->string('hubungan');
-            $table->date('tanggal_lahir');
-            $table->string('telepon')->nullable();
-            $table->string('alamat')->nullable();
+            $table->string('nama_perusahaan', 255);
+            $table->string('jabatan', 255);
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_selesai')->nullable();
+            $table->text('deskripsi_pekerjaan')->nullable();
             $table->timestamps();
         });
     }

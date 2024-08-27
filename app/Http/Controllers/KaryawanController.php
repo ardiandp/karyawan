@@ -289,6 +289,46 @@ class KaryawanController extends Controller
         $keahlian->delete();
         return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
     }
+
+    
+    public function pengalamankerjastore(Request $request, $id)
+    {
+        $pengalamankerja = new Pengalamankerja();
+        $pengalamankerja->karyawan_id = $id;
+        $pengalamankerja->nama_perusahaan = $request->nama_perusahaan;
+        $pengalamankerja->jabatan = $request->jabatan;
+        $pengalamankerja->tanggal_mulai = $request->tanggal_mulai;
+        $pengalamankerja->tanggal_selesai = $request->tanggal_selesai;
+        $pengalamankerja->deskripsi_pekerjaan = $request->deskripsi_pekerjaan;
+        
+        $pengalamankerja->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil ditambahkan');
+    }
+
+    
+    public function pengalamankerjaupdate(Request $request, $id, $pengalamankerja_id)
+    {
+        $pengalamankerja = Pengalamankerja::find($pengalamankerja_id);
+        $pengalamankerja->karyawan_id = $id;
+        $pengalamankerja->nama_perusahaan = $request->nama_perusahaan;
+        $pengalamankerja->jabatan = $request->jabatan;
+        $pengalamankerja->tanggal_mulai = $request->tanggal_mulai;
+        $pengalamankerja->tanggal_selesai = $request->tanggal_selesai;
+        $pengalamankerja->deskripsi_pekerjaan = $request->deskripsi_pekerjaan;
+        
+        $pengalamankerja->save();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil diupdate');
+    }
+
+    
+    public function pengalamankerjadelete($id, $pengalamankerja_id)
+    {
+        $pengalamankerja = Pengalamankerja::find($pengalamankerja_id);
+        $pengalamankerja->delete();
+        return redirect()->route('karyawan.profil', $id)->with('success', 'Data berhasil dihapus');
+    }
+
+    
     
 
 

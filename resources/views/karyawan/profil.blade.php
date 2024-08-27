@@ -329,15 +329,134 @@
         </div>
 
         <!-- Modal -->
-
-
-        
-
-     
       </div>
       <div class="tab-pane fade" id="pengalaman-kerja" role="tabpanel" aria-labelledby="pengalaman-kerja-tab">
-        {{ $karyawan->pengalaman_kerja }}
-        Pengalaman kerja
+       
+
+        <div class="float-right mb-3">
+          <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalPengalamanKerja">
+            Tambah Pengalaman Kerja
+          </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modalPengalamanKerja" tabindex="-1" role="dialog" aria-labelledby="modalPengalamanKerjaLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalPengalamanKerjaLabel">Tambah Pengalaman Kerja</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="{{ route('karyawan.pengalamankerjastore', $karyawan->id) }}" method="post">
+                  @csrf
+                  <div class="form-group">
+                    <label for="nama_perusahaan">Nama Perusahaan</label>
+                    <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan">
+                  </div>
+                  <div class="form-group">
+                    <label for="jabatan">Jabatan</label>
+                    <input type="text" class="form-control" id="jabatan" name="jabatan">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_mulai">Tanggal Mulai</label>
+                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai">
+                  </div>
+                  <div class="form-group">
+                    <label for="tanggal_selesai">Tanggal Selesai</label>
+                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai">
+                  </div>
+                  <div class="form-group">
+                    <label for="deskripsi_pekerjaan">Deskripsi Pekerjaan</label>
+                    <textarea class="form-control" id="deskripsi_pekerjaan" name="deskripsi_pekerjaan"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+</table>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nama Perusahaan</th>
+              <th>Jabatan</th>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Selesai</th>
+              <th>Deskripsi Pekerjaan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($karyawan->pengalamanKerja as $pengalaman_kerja)
+            <tr>
+              <td>{{ $pengalaman_kerja->nama_perusahaan }}</td>
+              <td>{{ $pengalaman_kerja->jabatan }}</td>
+              <td>{{ $pengalaman_kerja->tanggal_mulai }}</td>
+              <td>{{ $pengalaman_kerja->tanggal_selesai }}</td>
+              <td>{{ $pengalaman_kerja->deskripsi_pekerjaan }}</td>
+              <td>
+                <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edit_pengalaman_kerja_{{ $pengalaman_kerja->id }}">Edit</a>
+                <a href="{{ route('karyawan.pengalamankerjadelete', [$karyawan->id, $pengalaman_kerja->id]) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+               
+                
+
+              <div class="modal fade" id="edit_pengalaman_kerja_{{ $pengalaman_kerja->id }}" tabindex="-1" role="dialog" aria-labelledby="edit_pengalaman_kerja_{{ $pengalaman_kerja->id }}Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="edit_pengalaman_kerja_{{ $pengalaman_kerja->id }}Label">Edit Pengalaman Kerja</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ route('karyawan.pengalamankerjaupdate', [$karyawan->id, $pengalaman_kerja->id]) }}" method="POST">
+                        @csrf
+                        @method('post')
+                        <div class="form-group">
+                          <label for="nama_perusahaan">Nama Perusahaan</label>
+                          <input type="text" class="form-control" id="nama_perusahaan" name="nama_perusahaan" value="{{ $pengalaman_kerja->nama_perusahaan }}">
+                        </div>
+                        <div class="form-group">
+                          <label for="jabatan">Jabatan</label>
+                          <input type="text" class="form-control" id="jabatan" name="jabatan" value="{{ $pengalaman_kerja->jabatan }}">
+                        </div>
+                        <div class="form-group">
+                          <label for="tanggal_mulai">Tanggal Mulai</label>
+                          <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" value="{{ $pengalaman_kerja->tanggal_mulai }}">
+                        </div>
+                        <div class="form-group">
+                          <label for="tanggal_selesai">Tanggal Selesai</label>
+                          <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" value="{{ $pengalaman_kerja->tanggal_selesai ?? '' }}">
+                        </div>
+                        <div class="form-group">
+                          <label for="deskripsi_pekerjaan">Deskripsi Pekerjaan</label>
+                          <textarea class="form-control" id="deskripsi_pekerjaan" name="deskripsi_pekerjaan">{{ $pengalaman_kerja->deskripsi_pekerjaan ?? '' }}</textarea>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
 
       </div>
       <div class="tab-pane fade" id="berkas" role="tabpanel" aria-labelledby="berkas-tab">

@@ -15,9 +15,9 @@ class Pengalamankerja extends Model
         'karyawan_id',
         'nama_perusahaan',
         'jabatan',
-        'tanggung_jawab',
         'tanggal_mulai',
-        'tanggal_selesai'
+        'tanggal_selesai',
+        'deskripsi_pekerjaan'
     ];
 
     public function karyawan()
