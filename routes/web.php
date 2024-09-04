@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\BpjsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,7 +77,15 @@ Route::post('/karyawan/keahlianupdate/{id}/{id2}', [KaryawanController::class, '
 Route::post('/karyawan/pengalamankerjastore/{id}', [KaryawanController::class, 'pengalamankerjastore'])->name('karyawan.pengalamankerjastore');
 Route::get('/karyawan/pengalamankerjadelete/{id}/{id2}', [KaryawanController::class, 'pengalamankerjadelete'])->name('karyawan.pengalamankerjadelete');
 Route::post('/karyawan/pengalamankerjaupdate/{id}/{id2}', [KaryawanController::class, 'pengalamankerjaupdate'])->name('karyawan.pengalamankerjaupdate');
-// Auth
+
+
+// BPJS
+Route::get('/bpjs', [BpjsController::class, 'index'])->name('bpjs.index');
+Route::get('/bpjs/create', [BpjsController::class, 'create'])->name('bpjs.create');
+Route::post('/bpjs/store', [BpjsController::class, 'store'])->name('bpjs.store');
+Route::get('/bpjs/edit/{id}', [BpjsController::class, 'edit']);
+Route::post('/bpjs/update/{id}', [BpjsController::class, 'update'])->name('bpjs.update');
+Route::get('/bpjs/delete/{id}', [BpjsController::class, 'delete'])->name('bpjs.delete');
 
 // Auth
 });

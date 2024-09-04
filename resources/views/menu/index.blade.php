@@ -107,11 +107,18 @@
                                     @method('PUT')
                                     <div class="form-group">
                                         <label for="name">Name</label>
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name" value="{{$item->name}}">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Enter name" value="{{$item->name}}" onkeyup="generateSlug()">
                                     </div>
                                     <div class="form-group">
                                         <label for="slug">Slug</label>
-                                        <input type="text" name="slug" id="slug" class="form-control" placeholder="Enter slug" value="{{$item->slug}}">
+                                        <input type="text" name="slug" id="slug" class="form-control" placeholder="Enter slug" value="{{$item->slug}}" readonly>
+                                        <script>
+                                            function generateSlug() {
+                                                var name = document.getElementById('name').value;
+                                                var slug = name.toLowerCase().replace(/ /g, '-');
+                                                document.getElementById('slug').value = slug;
+                                            }
+                                        </script>
                                     </div>
                                     <div class="form-group">
                                         <label for="parent_id">Parent ID</label>

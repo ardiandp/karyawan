@@ -85,6 +85,18 @@
                   <p>Karyawan </p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ url('/assest')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Assets </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/bpjs')}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>BPJS </p>
+                </a>
+              </li>
            </ul>           
           </li>
 
